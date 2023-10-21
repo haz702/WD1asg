@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+  <!-- icons used and taken from: FontAwesome-->
+  <script src="https://kit.fontawesome.com/aa96e6185d.js" crossorigin="anonymous"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora&family=Roboto+Slab&display=swap" rel="stylesheet">
+
+  <!-- CSS File-->
+  <link rel="stylesheet" href="../../css/style.css">
+
+  <link rel="stylesheet" href="../../css/admin.css">
+  
+  <title>Admin Section - Manage Topics</title>
+  
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 class="logo-text"><span>Event</span>Share</h1>
+        </div>
+        <i class="fa-solid fa-bars menu-toggle"></i>
+        <div class="nav">
+            <ul>
+                <li>
+                    <a href=#>
+                    <i class="fa fa-user"></i>
+                    User
+                    <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <ul>
+                        <li><a href=# class="Logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Admin Page Wrapper-->
+    <div class="admin-wrapper">
+
+        <!-- Left Sidebar-->
+        <div class="left-sidebar">
+
+            <ul>
+                <li><a href="../posts/indexPost.html">Manage Posts</a></li>
+                <li><a href="indexTopic.html">Manage Topics</a></li>
+                <li><a href="../users/indexUsers.html">Manage Users</a></li>
+            </ul>
+
+        </div>
+        <!-- // Left Sidebar-->
+
+
+        <!-- Admin Content-->
+        <div class="admin-content">
+            <div class="button-group">
+                <a href="createTopic.html" class="btn btn-big">Add Topic</a>
+                <a href="indexTopic.html" class ="btn btn-big">Manage Topics</a>
+            </div>
+
+            <div class="content">
+                <h2 class="page-title">Manage Topics</h2>
+
+                <table>
+                    <thead>
+                        <th>Serial No.</th>
+                        <th>Name</th>
+                        <th colspan="2">Action</th>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Blog</td>
+                            <td><a hef="#" class="edit">edit</a></td>
+                            <td><a hef="#" class="delete">delete</a></td>
+                            
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Event</td>
+                            <td><a hef="#" class="edit">edit</a></td>
+                            <td><a hef="#" class="delete">delete</a></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--//Admin Content-->
+
+    </div>
+    <!--//Page Wrapper-->
+
+
+
+
+    <!-- JQuery (placed at the end for performance reasons)-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Custom Script-->
+    <script src="../../js/scripts.js"></script>
+</body>
+</html>
