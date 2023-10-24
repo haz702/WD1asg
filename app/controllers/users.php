@@ -90,7 +90,7 @@ if (isset($_POST["login-btn"])) {
             // log user in
             loginUser($user);
         } else {
-            array_push($errors, 'Wrong credentials');
+            array_push($errors, 'ls');
         }
     }
     $username = $_POST['username'];
@@ -124,7 +124,7 @@ if (isset($_POST["update-user"])) {
 }
 
 if (isset($_GET["del_id"])) {
-    $count = delete($table, $_GET["del_id"]);
+    $count = deleteData($table, $_GET["del_id"]);
     $_SESSION["message"] = 'Admin user deleted';
     $_SESSION["type"] = 'success';
     header('location: ' . BASE_URL . '/admin/users/indexUser.php');

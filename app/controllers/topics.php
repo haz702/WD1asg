@@ -43,7 +43,7 @@ if (isset($_GET["id"])) {
 
 if (isset($_GET["del_id"])) {
     $id = $_GET["del_id"];
-    $count = delete($table, $id);
+    $count = deleteData($table, $id);
     $_SESSION["message"] = 'Topic deleted successfully';
     $_SESSION['type'] = 'success';
     header('location:' . BASE_URL . '/admin/topics/indexTopic.php');
