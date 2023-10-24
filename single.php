@@ -1,4 +1,14 @@
 <?php include("path.php"); ?>
+<?php include(ROOT_PATH . "/app/controllers/posts.php"); ?>
+<?php
+if (isset($_GET["id"])) {
+    $post = selectOne("posts", ["id" => $_GET["id"]]);
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +32,7 @@
 </head>
 
 <body>
-    <?php include("app/includes/header.php"); ?>
+    <?php include(ROOT_PATH . "/app/includes/header.php"); ?>
 
     <!-- Page Wrapper-->
     <div class="page-wrapper">
