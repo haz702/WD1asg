@@ -2,11 +2,11 @@
 
 include(ROOT_PATH . "/app/database/db.php");
 include(ROOT_PATH . "/app/helpers/validateUser.php");
-
+include(ROOT_PATH .  "/app/helpers/middleware.php");
 
 //Initialize
 $table = 'users';
-$admin_users = selectAll($table, ["admin" => 1]);
+$admin_users = selectAll($table);
 $id = '';
 $admin = '';
 $username = '';
@@ -59,7 +59,7 @@ if (isset($_GET["id"])) {
     $user = selectOne($table, ["id" => $_GET["id"]]);
     $id = $user['id'];
     $username = $user['username'];
-    $admin = isset($user['admin']) ? 1 : 0;
+    $admin = $user['admin'] == 1? 1 : 0;
     $email = $user['email'];
 }
 
@@ -98,6 +98,7 @@ if (isset($_POST["login-btn"])) {
 }
 
 if (isset($_POST["update-user"])) {
+    adminOnly();
     $errors = validateUser($_POST);
 
     if (count($errors) === 0) {
@@ -123,11 +124,12 @@ if (isset($_POST["update-user"])) {
     }
 }
 
+// only admin can delete their account, didn't implement profile delete acc for users.
 if (isset($_GET["del_id"])) {
+    adminOnly();
     $count = deleteData($table, $_GET["del_id"]);
     $_SESSION["message"] = 'Admin user deleted';
     $_SESSION["type"] = 'success';
     header('location: ' . BASE_URL . '/admin/users/indexUser.php');
     exit();
 }
-?>
