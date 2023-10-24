@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
 }
 
 if (isset($_GET["del_id"])) {
-    $count = delete($table, $_GET["del_id"]);
+    $count = deleteData($table, $_GET["del_id"]);
     $_SESSION["message"] = 'Post deleted successfully';
     $_SESSION["type"] = 'success';
     header('location: ' . BASE_URL . '/admin/posts/indexPost.php');
@@ -73,7 +73,8 @@ if (isset($_POST["add-post"])) {
     if (count($errors) == 0) {
         
         unset($_POST["add-post"]);
-        $_POST["user_id"] = 1;
+        // user currently logged in, we use their id
+        $_POST["user_id"] = $_SESSION["id"];
         $_POST["published"] = isset($_POST["published"]) ? 1 : 0;
         //Take the tags in the body and converts certain HTML entities!! To prevent X-site scripting
         $_POST["body"] = htmlentities($_POST["body"]);
@@ -118,7 +119,8 @@ if (isset($_POST["update-post"])) {
     if (count($errors) == 0) {
         $id = $_POST["id"];
         unset($_POST["update-post"], $_POST["id"]);
-        $_POST["user_id"] = 1;
+        // user currently logged in: use their id for the session
+        $_POST["user_id"] = $_SESSION["id"];
         $_POST["published"] = isset($_POST["published"]) ? 1 : 0;
         //Take the tags in the body and converts certain HTML entities!! To prevent X-site scripting
         $_POST["body"] = htmlentities($_POST["body"]);

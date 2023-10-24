@@ -1,4 +1,16 @@
 <?php include("path.php"); ?>
+<?php include(ROOT_PATH . "/app/controllers/posts.php"); ?>
+<?php
+if (isset($_GET["id"])) {
+    $post = selectOne("posts", ["id" => $_GET["id"]]);
+
+}
+
+$posts = selectAll("posts", ["published" => 1])
+    ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,12 +29,14 @@
     <!-- CSS File-->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <title>Single Post</title>
+    <title>
+        <?php echo $post["title"]; ?> | EventShare
+    </title>
 
 </head>
 
 <body>
-    <?php include("app/includes/header.php"); ?>
+    <?php include(ROOT_PATH . "/app/includes/header.php"); ?>
 
     <!-- Page Wrapper-->
     <div class="page-wrapper">
@@ -33,42 +47,13 @@
             <!-- Main Content-->
             <div class="main-content-wrapper">
                 <div class="main-content single">
-                    <h1 class="post-title">Brunei Darussalam's Most Visited Attraction</h1>
+                    <h1 class="post-title">
+                        <?php echo $post["title"]; ?>
+                    </h1>
                     <img src="assets/images/image5.jpg" alt="SOASMosque" class="single-image">
 
                     <div class="post-content">
-                        <p>
-                            The Sultan Omar Ali Saifuddien Mosque is indeed one of Brunei's most renowned landmarks,
-                            celebrated for its stunning architecture and cultural significance.
-                            Situated in Bandar Seri Begawan, the mosque was completed in 1958 and is named after the
-                            28th Sultan of Brunei, Omar Ali Saifuddien III.
-                            With its gleaming golden domes, intricate marble work, and elegant minarets, the mosque is a
-                            striking blend of Mughal and Italian architectural styles, showcasing the country's
-                            commitment to preserving its Islamic heritage while embracing modern influences.
-                            The mosque is also surrounded by an artificial lagoon, creating a stunning reflection of the
-                            mosque's grandeur in the water.
-                            It stands as a symbol of the nation's devotion to Islam and is often regarded as one of the
-                            most beautiful mosques in the Asia-Pacific region.
-                        </p>
-                        <p>
-                            The interior of the Sultan Omar Ali Saifuddien Mosque is equally impressive, adorned with
-                            luxurious carpets, ornate chandeliers, and intricate calligraphy.
-                            The main prayer hall is known for its intricate designs and breathtaking craftsmanship,
-                            showcasing the skill and dedication of local artisans.
-                            The mosque's role extends beyond being a place of worship; it serves as a hub for community
-                            activities, religious events, and cultural celebrations, fostering a sense of unity and
-                            inclusivity within the country.
-                            Its iconic stature and cultural significance have made it a must-visit destination for
-                            tourists and locals alike, highlighting the proud heritage and religious devotion of Brunei.
-                        </p>
-                        <p>
-                            With its rich history and architectural grandeur, the Sultan Omar Ali Saifuddien Mosque
-                            continues to stand as a symbol of Brunei's deep-rooted Islamic heritage and the nation's
-                            commitment to preserving its cultural legacy.
-                            Its serene ambiance, intricate design, and cultural importance make it a site of reverence
-                            and admiration for visitors and locals alike, reflecting the profound spiritual and cultural
-                            significance of Islam in Brunei's society.
-                        </p>
+                        <?php echo html_entity_decode($post["body"]); ?>
                     </div>
                 </div>
             </div>
@@ -79,40 +64,17 @@
 
                 <div class="section-popular">
                     <h2 class="section-title">Popular Posts</h2>
-                    <div class="post clearfix">
-                        <img src="assets/images/image1.jpg" alt="Kianggeh">
+                    <?php foreach ($posts as $p): ?>
+                        <div class="post clearfix">
+                        <img src="<?php BASE_URL . '/assets/images/' . $p['image'] ?>" alt="Kianggeh">
                         <a href="single2.html" class="title">
-                            <h4>Tamu Kianggeh - A treasured heritage</h4>
+                            <h4><?php echo $p["title"] ?></h4>
                         </a>
                     </div>
+                    <?php endforeach; ?>
 
-                    <div class="post clearfix">
-                        <img src="assets/images/image1.jpg" alt="Kianggeh">
-                        <a href="single2.html" class="title">
-                            <h4>Tamu Kianggeh - A treasured heritage</h4>
-                        </a>
-                    </div>
 
-                    <div class="post clearfix">
-                        <img src="assets/images/image1.jpg" alt="Kianggeh">
-                        <a href="single2.html" class="title">
-                            <h4>Tamu Kianggeh - A treasured heritage</h4>
-                        </a>
-                    </div>
 
-                    <div class="post clearfix">
-                        <img src="assets/images/image1.jpg" alt="Kianggeh">
-                        <a href="single2.html" class="title">
-                            <h4>Tamu Kianggeh - A treasured heritage</h4>
-                        </a>
-                    </div>
-
-                    <div class="post clearfix">
-                        <img src="assets/images/image1.jpg" alt="Kianggeh">
-                        <a href="single2.html" class="title">
-                            <h4>Tamu Kianggeh - A treasured heritage</h4>
-                        </a>
-                    </div>
                 </div>
 
                 <div class="section topics">

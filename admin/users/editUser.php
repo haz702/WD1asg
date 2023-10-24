@@ -44,6 +44,8 @@
                 <h2 class="page-title">Add User</h2>
 
                 <form action="editUser.php" method="post">
+                <?php include(ROOT_PATH . "/app/helpers/formErrors.php"); ?>
+
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
 
                     <div>

@@ -73,7 +73,7 @@ function loginUser($user)
     $_SESSION["type"] = 'success';
 
     if ($_SESSION["admin"]) {
-        header('location: ' . BASE_URL . '/admin/users/indexUser.php');
+        header('location: ' . BASE_URL . '/admin/dashboard.php');
     } else {
         header('location: ' . BASE_URL . '/index.php');
     }
@@ -90,7 +90,7 @@ if (isset($_POST["login-btn"])) {
             // log user in
             loginUser($user);
         } else {
-            array_push($errors, 'Wrong credentials');
+            array_push($errors, 'ls');
         }
     }
     $username = $_POST['username'];
@@ -100,24 +100,20 @@ if (isset($_POST["login-btn"])) {
 if (isset($_POST["update-user"])) {
     $errors = validateUser($_POST);
 
-    if (in_array("Email already exist", $errors)) {
-        $emailClass = "input-error";
-    }
-
     if (count($errors) === 0) {
         // remove variables so that our post sent matches the database table attributes
-        unset($_POST["passwordConf"], $_POST["update-user"]);
+        $id = $POST["id"];
+        unset($_POST["passwordConf"], $_POST["update-user"], $_POST["id"]);
         $_POST['password'] = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
         // check if the values incoming has the admin attribute
+        $_POST['admin'] = isset($_POST["admin"]) ? 1 : 0;
+        $user_id = update('users', $_POST["id"], $_POST);
+        $_SESSION["message"] = "Admin user created successfully";
+        $_SESSION["type"] = "success";
+        header('location: ' . BASE_URL . '/admin/users/indexUser.php');
+        exit();
 
-            $_POST['admin'] = isset($_POST["admin"]) ? 1: 0;
-            $user_id = update('users', $_POST["id"], $_POST);
-            $_SESSION["message"] = "Admin user created successfully";
-            $_SESSION["type"] = "success";
-            header('location: ' . BASE_URL . '/admin/users/indexUser.php');
-            exit();
-        
     } else {
         $username = $_POST['username'];
         $admin = isset($_POST['admin']) ? 1 : 0;
@@ -128,7 +124,7 @@ if (isset($_POST["update-user"])) {
 }
 
 if (isset($_GET["del_id"])) {
-    $count = delete($table, $_GET["del_id"]);
+    $count = deleteData($table, $_GET["del_id"]);
     $_SESSION["message"] = 'Admin user deleted';
     $_SESSION["type"] = 'success';
     header('location: ' . BASE_URL . '/admin/users/indexUser.php');
