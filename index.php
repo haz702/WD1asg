@@ -1,5 +1,15 @@
 <?php include("path.php");
 include(ROOT_PATH . "/app/controllers/topics.php");
+
+$posts = array();
+$postsTitle = "Recent Posts";
+
+if (isset($_POST["search-term"])) {
+    $postsTitle = "Showing results related to '" . $_POST["search-term"] . "'";
+    $posts = searchPosts($_POST["search-term"]);
+} else {
+    $posts = getPublishedPosts();
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,80 +50,30 @@ include(ROOT_PATH . "/app/controllers/topics.php");
             <i class="fa-solid fa-chevron-left prev"></i>
             <i class="fa-solid fa-chevron-right next"></i>
 
+
             <div class="post-wrapper">
 
-                <div class="post clearfix">
-                    <img src="assets/images/image2.jpg" alt="thirst-fest" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">New 'Thrift-fest' in Times Square, see you there!</a></h4>
-                        <div class="post-userdesc">
-                            <i class="fa fa-user">User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar">&nbsp; Oct 15th, 2023</i>
+                <?php foreach ($posts as $post): ?>
+                    <div class="post clearfix">
+                        <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="thirst-fest"
+                            class="slider-image">
+                        <div class="post-info">
+                            <h4><a href="single.php">"
+                                    <?php echo $post["title"] ?>"
+                                </a></h4>
+                            <div class="post-userdesc">
+                                <i class="fa fa-user">
+                                    <?php echo $post["username"]; ?>
+                                </i>
+                                &nbsp;
+                                <i class="fa-regular fa-calendar">&nbsp;
+                                    <?php echo date('F j, Y', strtotime($post["created_at"])) ?>
+                                </i>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endforeach; ?>
 
-                <div class="post clearfix">
-                    <img src="assets/images/image3.jpg" alt="koreanfestival" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">Korean festival in Times Square, open to everyone!</a></h4>
-                        <div class="post-userdesc">
-                            <i class="fa fa-user">User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar">&nbsp; Sep 20th, 2023</i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="post clearfix">
-                    <img src="assets/images/image4.jpg" alt="UTBCarnival" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">UTB Canival 2023, open to the public!</a></h4>
-                        <div class="post-userdesc">
-                            <i class="fa fa-user">User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar">&nbsp; Aug 31st, 2023</i>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="post clearfix">
-                    <img src="assets/images/image2.jpg" alt="thirst-fest" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">New 'Thrift-fest' in Times Square, see you there!</a></h4>
-                        <div class="post-userdesc">
-                            <i class="fa fa-user">User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar">&nbsp; Oct 15th, 2023</i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="post clearfix">
-                    <img src="assets/images/image3.jpg" alt="koreanfestival" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">Korean festival in Times Square, open to everyone!</a></h4>
-                        <div class="post-userdesc">
-                            <i class="fa fa-user">User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar">&nbsp; Sep 20th, 2023</i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="post clearfix">
-                    <img src="assets/images/image4.jpg" alt="UTBCarnival" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">UTB Canival 2023, open to the public!</a></h4>
-                        <div class="post-userdesc">
-                            <i class="fa fa-user">User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar">&nbsp; Aug 31st, 2023</i>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!--//Post Slider-->
 
@@ -122,67 +82,30 @@ include(ROOT_PATH . "/app/controllers/topics.php");
 
                 <!-- Main Content-->
                 <div class="main-content">
-                    <h1 class="recent-post-title">Recent Posts</h1>
-
-                    <div class="post clearfix">
-                        <img src="assets/images/image5.jpg" alt="SOASMosque" class="post-image">
-                        <div class="post-preview">
-                            <h2><a href="single.html">Brunei Darussalam's Most Visited Attraction</a></h2>
-                            <i class="fa fa-user"> User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar"> Oct 19th, 2023</i>
-                            <p class="preview-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Consequatur veniam quia dolor laudantium tempora. Voluptatem.
-                            </p>
-                            <a href="single.html" class="btn read-more">Read More</a>
+                    <h1 class="recent-post-title"><?php echo $postsTitle; ?></h1>
+                    <?php foreach ($posts as $post): ?>
+                        <div class="post clearfix">
+                            <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="SOASMosque"
+                                class="post-image">
+                            <div class="post-preview">
+                                <h2><a href="single.php">
+                                        <?php echo $post["title"] ?>
+                                    </a></h2>
+                                <i class="fa fa-user">
+                                    <?php echo $post["username"]; ?>
+                                </i>
+                                &nbsp;
+                                <i class="fa-regular fa-calendar">
+                                    <?php echo date('F j, Y', strtotime($post["created_at"])) ?>
+                                </i>
+                                <p class="preview-text">
+                                    <?php echo html_entity_decode(substr("body", 0, 150) . "..."); ?>
+                                </p>
+                                <a href="single.php" class="btn read-more">Read More</a>
+                            </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
 
-                    <div class="post clearfix">
-                        <img src="assets/images/image1.jpg" alt="Tamu-Kianggeh" class="post-image">
-                        <div class="post-preview">
-                            <h2><a href="single2.html">Tamu Kianggeh - A Treasured heritage</a></h2>
-                            <i class="fa fa-user"> User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar"> Oct 19th, 2023</i>
-                            <p class="preview-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Consequatur veniam quia dolor laudantium tempora. Voluptatem.
-                            </p>
-                            <a href="single2.html" class="btn read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="post clearfix">
-                        <img src="assets/images/image5.jpg" alt="SOASMosque" class="post-image">
-                        <div class="post-preview">
-                            <h2><a href="single.html">Brunei Darussalam's Most Visited Attraction</a></h2>
-                            <i class="fa fa-user"> User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar"> Oct 19th, 2023</i>
-                            <p class="preview-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Consequatur veniam quia dolor laudantium tempora. Voluptatem.
-                            </p>
-                            <a href="single.html" class="btn read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="post clearfix">
-                        <img src="assets/images/image1.jpg" alt="Tamu-Kianggeh" class="post-image">
-                        <div class="post-preview">
-                            <h2><a href="single2.html">Tamu Kianggeh - A Treasured heritage</a></h2>
-                            <i class="fa fa-user"> User</i>
-                            &nbsp;
-                            <i class="fa-regular fa-calendar"> Oct 19th, 2023</i>
-                            <p class="preview-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Consequatur veniam quia dolor laudantium tempora. Voluptatem.
-                            </p>
-                            <a href="single2.html" class="btn read-more">Read More</a>
-                        </div>
-                    </div>
 
 
                 </div>
@@ -192,7 +115,7 @@ include(ROOT_PATH . "/app/controllers/topics.php");
 
                     <div class="section search">
                         <h2 class="section-title">Search</h2>
-                        <form action="index.html" method="post">
+                        <form action="index.php" method="post">
                             <input type="text" name="search-term" class="text-input" placeholder="Search...">
                         </form>
                     </div>
