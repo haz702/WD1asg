@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
 }
 
 if (isset($_GET["del_id"])) {
-    $count = delete($table, $_GET["del_id"]);
+    $count = deleteData($table, $_GET["del_id"]);
     $_SESSION["message"] = 'Post deleted successfully';
     $_SESSION["type"] = 'success';
     header('location: ' . BASE_URL . '/admin/posts/indexPost.php');

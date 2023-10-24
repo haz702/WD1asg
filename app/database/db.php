@@ -102,7 +102,7 @@ function selectOne($table, $conditions)
     $sql = $sql . " LIMIT 1";
 
     $stmt = executeQuery($sql, $conditions);
-    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $records = $stmt->get_result()->fetch_assoc();
     return $records;
 }
 
@@ -156,7 +156,7 @@ function update($table, $id, $data)
     return $stmt->affected_rows;
 }
 
-function delete($table, $id)
+function deleteData($table, $id)
 {
     global $conn;
     // $sql = "DELETE FROM users WHERE id=?"
