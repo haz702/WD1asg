@@ -10,6 +10,8 @@ if (isset($_POST["search-term"])) {
 } else {
     $posts = getPublishedPosts();
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -58,8 +60,8 @@ if (isset($_POST["search-term"])) {
                         <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="thirst-fest"
                             class="slider-image">
                         <div class="post-info">
-                            <h4><a href="single.php">"
-                                    <?php echo $post["title"] ?>"
+                            <h4><a href="single.php?id=<?php echo $post["id"]; ?>">
+                                    <?php echo $post["title"]; ?>
                                 </a></h4>
                             <div class="post-userdesc">
                                 <i class="fa fa-user">
@@ -82,14 +84,16 @@ if (isset($_POST["search-term"])) {
 
                 <!-- Main Content-->
                 <div class="main-content">
-                    <h1 class="recent-post-title"><?php echo $postsTitle; ?></h1>
+                    <h1 class="recent-post-title">
+                        <?php echo $postsTitle; ?>
+                    </h1>
                     <?php foreach ($posts as $post): ?>
                         <div class="post clearfix">
                             <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="SOASMosque"
                                 class="post-image">
                             <div class="post-preview">
-                                <h2><a href="single.php">
-                                        <?php echo $post["title"] ?>
+                                <h2><a href="single.php?id=<?php echo $post["id"]; ?>">
+                                        <?php echo $post["title"]; ?>
                                     </a></h2>
                                 <i class="fa fa-user">
                                     <?php echo $post["username"]; ?>
@@ -101,7 +105,7 @@ if (isset($_POST["search-term"])) {
                                 <p class="preview-text">
                                     <?php echo html_entity_decode(substr("body", 0, 150) . "..."); ?>
                                 </p>
-                                <a href="single.php" class="btn read-more">Read More</a>
+                                <a href="single.php?id=<?php echo $post["id"]; ?>" class="btn read-more">Read More</a>
                             </div>
                         </div>
                     <?php endforeach; ?>
