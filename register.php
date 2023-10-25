@@ -1,5 +1,5 @@
 <?php include("path.php"); ?>
-<?php include(ROOT_PATH . "/app/controllers/users.php"); 
+<?php include(ROOT_PATH . "/app/controllers/users.php");
 guestsOnly();
 ?>
 
@@ -37,22 +37,23 @@ guestsOnly();
 
             <div>
                 <label>Username</label>
-                <input type="text" name="username" value="<?php echo $username; ?>" class="text-input">
+                <input type="text" name="username" value="<?php echo $username; ?>" class="text-input" placeholder="Enter username">
             </div>
 
             <div>
                 <label>Email</label>
-                <input type="email" name="email" value="<?php echo $email; ?>" class="text-input <?php echo $emailClass; ?>"" >
+                <input type="email" name="email" value="<?php echo $email; ?>" class="text-input <?php echo $emailClass; ?>" placeholder="Example@gmail.com">
             </div>
 
             <div>
                 <label>Password</label>
-                <input type="password" name="password" value="<?php echo $password; ?>" class="text-input">
+                <input type=" password" name="password" value="<?php echo $password; ?>" class="text-input <?php echo $passwordClass; ?>" placeholder="Enter password">
+
             </div>
 
             <div>
                 <label>Confirm Password</label>
-                <input type="password" name="passwordConf" value="<?php echo $passwordConf; ?>" class="text-input">
+                <input type="password" name="passwordConf" value="<?php echo $passwordConf; ?>" class="text-input <?php echo $passwordClass; ?>" placeholder="Enter password again">
             </div>
 
             <div>
@@ -74,8 +75,8 @@ guestsOnly();
     <script src="assets/js/scripts.js"></script>
     <!-- Input Color Change Script -->
     <script src="assets/js/inputColorChange.js"></script>
-    <script src="assets\js\removeRedBorder.js"></script>
+    <script src="assets/js/removeRedBorder.js"></script>
 
-</body >
+</body>
 
-</html >
+</html>

@@ -17,11 +17,18 @@ $passwordConf = '';
 $errors = array(); // Initialize $errors as an array
 
 if (isset($_POST["register-btn"]) || isset($_POST["create-admin"])) {
+
     $errors = validateUser($_POST);
+
 
     if (in_array("Email already exist", $errors)) {
         $emailClass = "input-error";
     }
+
+    if (in_array("Password must be at least 8 characters", $errors) || in_array("Password do not match", $errors)) {
+        $passwordClass = "input-error";
+    }
+
 
     if (count($errors) === 0) {
         // remove variables so that our post sent matches the database table attributes
@@ -59,7 +66,7 @@ if (isset($_GET["id"])) {
     $user = selectOne($table, ["id" => $_GET["id"]]);
     $id = $user['id'];
     $username = $user['username'];
-    $admin = $user['admin'] == 1? 1 : 0;
+    $admin = $user['admin'] == 1 ? 1 : 0;
     $email = $user['email'];
 }
 
@@ -90,7 +97,7 @@ if (isset($_POST["login-btn"])) {
             // log user in
             loginUser($user);
         } else {
-            array_push($errors, 'ls');
+            array_push($errors, 'Wrong credentials');
         }
     }
     $username = $_POST['username'];
@@ -114,7 +121,6 @@ if (isset($_POST["update-user"])) {
         $_SESSION["type"] = "success";
         header('location: ' . BASE_URL . '/admin/users/indexUser.php');
         exit();
-
     } else {
         $username = $_POST['username'];
         $admin = isset($_POST['admin']) ? 1 : 0;

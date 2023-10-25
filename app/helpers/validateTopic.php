@@ -19,7 +19,7 @@ function validateTopic($topic)
     // check if it exist
     if ($existingTopic) {
         // post defined in the database != $topic trying to update
-        if ($topic["update-topic"] && $existingTopic["id"] != $topic["id"]) {
+        if (isset($topic["update-topic"]) && $existingTopic["id"] != $topic["id"]) {
             array_push($errors, "Topic name already exist");
         }
 
