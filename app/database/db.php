@@ -8,8 +8,8 @@ require("connect.php");
 function dd($value)
 {
     // Print the '$users' array in a human-readable format.
-// The '<pre>' HTML tags preserve text formatting, making it easier to read.
-// The 'print_r()' function prints human-readable information about a variable.
+    // The '<pre>' HTML tags preserve text formatting, making it easier to read.
+    // The 'print_r()' function prints human-readable information about a variable.
     echo "<pre>", print_r($value, true), "</pre>";
     die();
 }
@@ -51,8 +51,8 @@ function selectAll($table, $conditions = [])
         $stmt->execute();
 
         // Fetch all the results of the executed statement as an associative array.
-// The 'get_result' method returns a 'mysqli_result' object for successful SELECT queries, or FALSE for other DML queries or on failure.
-// The 'fetch_all' method returns an array of associative arrays representing fetched rows in the result set of the executed statement.
+        // The 'get_result' method returns a 'mysqli_result' object for successful SELECT queries, or FALSE for other DML queries or on failure.
+        // The 'fetch_all' method returns an array of associative arrays representing fetched rows in the result set of the executed statement.
         $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
         return $records;
@@ -79,7 +79,6 @@ function selectAll($table, $conditions = [])
         // Return the fetched records.
         return $records;
     }
-
 }
 
 //2nd arg. Retrieves a post with a specific ID from a table.
@@ -191,6 +190,29 @@ function getPublishedPosts()
     return $records;
 }
 
+function getPostsByTopicId($topic_id)
+{
+    global $conn;
+    // SELECT * FROM posts WHERE published=1
+    // p.* = all column from post table
+    // u.username = username column from users table
+    // users is table
+    // p = alias to posts table
+    // u = alias to users table
+    // ON user_id from posts table = id from users table WHERE
+    // published
+    $sql = "SELECT p.*, u.username 
+            FROM posts AS p 
+            JOIN users AS u 
+            ON p.user_id=u.id 
+            WHERE p.published=?
+            AND topic_id=?";
+
+    $stmt = executeQuery($sql, ["published" => 1, "topic_id" => $topic_id]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+}
+
 function searchPosts($term)
 {
     $match = '%' . $term . '%';
@@ -216,5 +238,3 @@ function searchPosts($term)
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     return $records;
 }
-
-
