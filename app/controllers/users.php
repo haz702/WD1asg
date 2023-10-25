@@ -137,6 +137,8 @@ if (isset($_POST["update-user"])) {
             $count = update($table, $id, $_POST);
             $_SESSION["message"] = "/user updated successfully";
             $_SESSION["type"] = "success";
+            $_SESSION["username"] = $_POST["username"];
+            $_SESSION["email"] = $_POST["email"];
             header('location: ' . BASE_URL . '/admin/users/indexUser.php');
             exit();
         }
@@ -151,9 +153,19 @@ if (isset($_POST["update-user"])) {
 
 // only admin can delete their account, didn't implement profile delete acc for users.
 if (isset($_GET["del_id"])) {
-    $count = deleteData($table, $_GET["del_id"]);
-    $_SESSION["message"] = 'Admin user deleted';
-    $_SESSION["type"] = 'success';
-    header('location: ' . BASE_URL . '/admin/users/indexUser.php');
-    exit();
+    if ($_SESSION["admin"] == 0) {
+        $count = deleteData($table, $_GET["del_id"]);
+        $_SESSION["message"] = 'User deleted';
+        $_SESSION["type"] = 'success';
+        header('location: ' . BASE_URL . '/index.php');
+        exit();
+    } else {
+        $count = deleteData($table, $_GET["del_id"]);
+        $_SESSION["message"] = 'User deleted';
+        $_SESSION["type"] = 'success';
+        header('location: ' . BASE_URL . '/admin/users/indexUser.php');
+        exit();
+    }
+    
+
 }

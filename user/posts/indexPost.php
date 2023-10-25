@@ -1,7 +1,6 @@
 <?php include("../../path.php"); ?>
 <?php include(ROOT_PATH . "/app/controllers/posts.php");
 usersOnly();
-
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +47,7 @@ usersOnly();
                 <h2 class="page-title">Manage Posts</h2>
 
                 <?php include(ROOT_PATH . "/app/includes/messages.php"); ?>
-                
+
                 <table>
                     <thead>
                         <th>Serial No.</th>
@@ -58,29 +57,32 @@ usersOnly();
                     </thead>
 
                     <tbody>
-                        <?php foreach ($posts as $key => $post): ?>
-                            <tr>
-                                <td>
-                                    <?php echo $key + 1; ?>
-                                </td>
-                                <td>
-                                    <?php echo $post["title"]; ?>
-                                </td>
-                                <td>Awa</td>
-                                <td><a href="editPost.php?id=<?php echo $post["id"]; ?>" class="edit">edit</a></td>
-                                <td><a href="editPost.php?del_id=<?php echo $post["id"]; ?>" class="delete">delete</a>
+                        <?php foreach ($posts as $key => $post) : ?>
+                            <?php if ($_SESSION["id"] == $post["user_id"]) : ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $key + 1; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $post["title"]; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $_SESSION["username"] ?>
 
-                                    <?php if ($post['published']): ?>
-                                    <!-- Want to know the post and identify it, then need published variable to set it -->
-                                    <td><a href="editPost.php?published=0&p_id=<?php echo $post["id"] ?>"
-                                            class="unpublish">unpublish</a></td>
-                                <?php else: ?>
+                                    <td><a href="editPost.php?id=<?php echo $post["id"]; ?>" class="edit">edit</a></td>
+                                    <td><a href="editPost.php?del_id=<?php echo $post["id"]; ?>" class="delete">delete</a>
+
+                                        <?php if ($post['published']) : ?>
+                                            <!-- Want to know the post and identify it, then need published variable to set it -->
+                                    <td><a href="editPost.php?published=0&p_id=<?php echo $post["id"] ?>" class="unpublish">unpublish</a></td>
+                                <?php else : ?>
                                     <td><a href="editPost.php?published=1&p_id=<?php echo $post["id"] ?>" class="publish">publish</a>
                                     </td>
                                 <?php endif; ?>
                                 </td>
 
-                            </tr>
+                                </tr>
+                            <?php endif ?></td>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
