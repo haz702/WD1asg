@@ -1,8 +1,8 @@
 <?php include("../../path.php"); ?>
-<?php include(ROOT_PATH . "/app/controllers/users.php"); 
+<?php include(ROOT_PATH . "/app/controllers/topics.php");
+usersOnly();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +23,7 @@
     <!-- Admin Styling File-->
     <link rel="stylesheet" href="../../assets/css/admin.css" />
 
-    <title>Admin Section - Add Users</title>
+    <title>Admin Section - Manage Topic</title>
 </head>
 
 <body>
@@ -33,46 +33,45 @@
     <!-- Admin Page Wrapper-->
     <div class="admin-wrapper">
         <!-- Left Sidebar-->
-        <?php include(ROOT_PATH . "/app/includes/adminSidebar.php"); ?>
+        <?php include(ROOT_PATH . "/app/includes/userSidebar.php"); ?> 
         <!-- // Left Sidebar-->
 
         <!-- Admin Content-->
         <div class="admin-content">
             <div class="button-group">
-                <a href="createUser.php" class="btn btn-big">Add User</a>
-                <a href="indexUser.php" class="btn btn-big">Manage Users</a>
+                <a href="createTopic.php" class="btn btn-big">Add Topic</a>
+                <a href="indexTopic.php" class="btn btn-big">Manage Topics</a>
             </div>
 
             <div class="content">
-                <h2 class="page-title">Manage Users</h2>
+                <h2 class="page-title">Manage Topics</h2>
 
+                <!-- //Checks if have message in session -->
                 <?php include(ROOT_PATH . "/app/includes/messages.php"); ?>
 
                 <table>
                     <thead>
                         <th>Serial No.</th>
-                        <th>Username</th>
-                        <th>Email</th>
+                        <th>Name</th>
                         <th colspan="2">Action</th>
                     </thead>
 
                     <tbody>
-                        <?php foreach ($admin_users as $key => $user): ?>
+                        <?php foreach ($topics as $key => $topic) : ?>
                             <tr>
                                 <td>
-                                    
                                     <?php echo $key + 1; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user["username"]; ?>
+                                    <?php echo $topic["name"]; ?>
                                 </td>
-                                <td>
-                                    <?php echo $user["email"]; ?>
+                                <td><a href="editTopic.php?id=<?php echo $topic["id"]; ?>" class="edit">edit</a></td>
+                                <td><a href="indexTopic.php?del_id=<?php echo $topic["id"]; ?>" class="delete">delete</a>
                                 </td>
-                                <td><a href="editUser.php?id=<?php echo $user["id"]; ?>" class="edit">edit</a></td>
-                                <td><a href="indexUser.php?del_id=<?php echo $user["id"]; ?>" class="delete">delete</a>
+
                             </tr>
                         <?php endforeach; ?>
+
                     </tbody>
                 </table>
             </div>

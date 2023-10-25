@@ -1,5 +1,6 @@
 <?php include("../../path.php"); ?>
-<?php include(ROOT_PATH . "/app/controllers/users.php"); 
+<?php include(ROOT_PATH . "/app/controllers/posts.php");
+usersOnly();
 
 ?>
 
@@ -23,7 +24,7 @@
     <!-- Admin Styling File-->
     <link rel="stylesheet" href="../../assets/css/admin.css" />
 
-    <title>Admin Section - Add Users</title>
+    <title>Admin Section - Manage Post</title>
 </head>
 
 <body>
@@ -33,44 +34,52 @@
     <!-- Admin Page Wrapper-->
     <div class="admin-wrapper">
         <!-- Left Sidebar-->
-        <?php include(ROOT_PATH . "/app/includes/adminSidebar.php"); ?>
+        <?php include(ROOT_PATH . "/app/includes/userSidebar.php"); ?>
         <!-- // Left Sidebar-->
 
         <!-- Admin Content-->
         <div class="admin-content">
             <div class="button-group">
-                <a href="createUser.php" class="btn btn-big">Add User</a>
-                <a href="indexUser.php" class="btn btn-big">Manage Users</a>
+                <a href="createPost.php" class="btn btn-big">Add Post</a>
+                <a href="indexPost.php" class="btn btn-big">Manage Posts</a>
             </div>
 
             <div class="content">
-                <h2 class="page-title">Manage Users</h2>
+                <h2 class="page-title">Manage Posts</h2>
 
                 <?php include(ROOT_PATH . "/app/includes/messages.php"); ?>
-
+                
                 <table>
                     <thead>
                         <th>Serial No.</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th colspan="2">Action</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th colspan="3">Action</th>
                     </thead>
 
                     <tbody>
-                        <?php foreach ($admin_users as $key => $user): ?>
+                        <?php foreach ($posts as $key => $post): ?>
                             <tr>
                                 <td>
-                                    
                                     <?php echo $key + 1; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user["username"]; ?>
+                                    <?php echo $post["title"]; ?>
                                 </td>
-                                <td>
-                                    <?php echo $user["email"]; ?>
+                                <td>Awa</td>
+                                <td><a href="editPost.php?id=<?php echo $post["id"]; ?>" class="edit">edit</a></td>
+                                <td><a href="editPost.php?del_id=<?php echo $post["id"]; ?>" class="delete">delete</a>
+
+                                    <?php if ($post['published']): ?>
+                                    <!-- Want to know the post and identify it, then need published variable to set it -->
+                                    <td><a href="editPost.php?published=0&p_id=<?php echo $post["id"] ?>"
+                                            class="unpublish">unpublish</a></td>
+                                <?php else: ?>
+                                    <td><a href="editPost.php?published=1&p_id=<?php echo $post["id"] ?>" class="publish">publish</a>
+                                    </td>
+                                <?php endif; ?>
                                 </td>
-                                <td><a href="editUser.php?id=<?php echo $user["id"]; ?>" class="edit">edit</a></td>
-                                <td><a href="indexUser.php?del_id=<?php echo $user["id"]; ?>" class="delete">delete</a>
+
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
