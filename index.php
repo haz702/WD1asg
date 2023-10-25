@@ -2,10 +2,13 @@
 include(ROOT_PATH . "/app/controllers/topics.php");
 
 $posts = array();
-$postsTitle = "Recent Posts";
+$postsTitle = 'Recent Posts';
 
-if (isset($_POST["search-term"])) {
-    $postsTitle = "Showing results related to '" . $_POST["search-term"] . "'";
+if (isset($_GET["t_id"])) {
+    $postsTitle = "Showing results related to '" . $_GET['name'] . "'";
+    $posts = getPostsByTopicId($_GET["t_id"]);
+} else if (isset($_POST["search-term"])) {
+    $postsTitle = "Showing results related to '" . $_POST['search-term'] . "'";
     $posts = searchPosts($_POST["search-term"]);
 } else {
     $posts = getPublishedPosts();
@@ -55,15 +58,14 @@ if (isset($_POST["search-term"])) {
 
             <div class="post-wrapper">
 
-                <?php foreach ($posts as $post): ?>
+                <?php foreach ($posts as $post) : ?>
                     <div class="post clearfix">
-                        <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="thirst-fest"
-                            class="slider-image">
+                        <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="thirst-fest" class="slider-image">
                         <div class="post-info">
                             <h4><a href="single.php?id=<?php echo $post["id"]; ?>">
                                     <?php echo $post["title"]; ?>
                                 </a></h4>
-                            <div class="post-userdesc">
+                            <div class="post-userDesc">
                                 <i class="fa fa-user">
                                     <?php echo $post["username"]; ?>
                                 </i>
@@ -87,10 +89,9 @@ if (isset($_POST["search-term"])) {
                     <h1 class="recent-post-title">
                         <?php echo $postsTitle; ?>
                     </h1>
-                    <?php foreach ($posts as $post): ?>
+                    <?php foreach ($posts as $post) : ?>
                         <div class="post clearfix">
-                            <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="SOASMosque"
-                                class="post-image">
+                            <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="SOASMosque" class="post-image">
                             <div class="post-preview">
                                 <h2><a href="single.php?id=<?php echo $post["id"]; ?>">
                                         <?php echo $post["title"]; ?>
@@ -127,10 +128,11 @@ if (isset($_POST["search-term"])) {
                     <div class="section topics">
                         <h2 class="section-title">Types of Posts</h2>
                         <ul>
-                            <?php foreach ($topics as $key => $topic): ?>
-                                <li><a href="#">
+                            <?php foreach ($topics as $key => $topic) : ?>
+                                <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name'] ?>">
                                         <?php echo $topic["name"]; ?>
-                                    </a></li>
+                                    </a>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
                     </div>

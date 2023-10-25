@@ -22,7 +22,7 @@ function validatePost($post)
     // check if it exist
     if ($existingPost) {
         // post defined in the database != $post trying to update
-        if ($post["update-post"] && $existingPost["id"] != $post["id"]) {
+        if (isset($post["update-post"]) && $existingPost["id"] != $post["id"]) {
             array_push($errors, "A post with that title already exists");
         }
 
