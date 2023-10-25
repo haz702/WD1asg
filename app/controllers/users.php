@@ -66,7 +66,9 @@ if (isset($_GET["id"])) {
     $user = selectOne($table, ["id" => $_GET["id"]]);
     $id = $user['id'];
     $username = $user['username'];
+
     $admin = $user['admin'] == 1 ? 1 : 0;
+
     $email = $user['email'];
 }
 
