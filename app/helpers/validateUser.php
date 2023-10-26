@@ -42,7 +42,7 @@ function validateUser($user)
             array_push($errors, "Email already exist");
         }
 
-        if ($existingUser) {
+        if (isset($user["register-btn"])) {
             array_push($errors, "Email already exist");
         }
     }

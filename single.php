@@ -50,7 +50,7 @@ $posts = selectAll("posts", ["published" => 1]);
                     <h1 class="post-title">
                         <?php echo $post["title"]; ?>
                     </h1>
-                    <img src="assets/images/image5.jpg" alt="SOASMosque" class="single-image">
+                    <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="SOASMosque" class="post-image">
 
                     <div class="post-content">
                         <?php echo html_entity_decode($post["body"]); ?>
@@ -67,15 +67,13 @@ $posts = selectAll("posts", ["published" => 1]);
                     <?php foreach ($posts as $p): ?>
                         <div class="post clearfix">
                             <img src="<?php echo BASE_URL . "/assets/images/" . $p["image"]; ?>" alt="ImgNotWork">
-                            <a href="single.php" class="title">
+                            <a href="single.php?id=<?php echo $p["id"]; ?>" class="title">
                                 <h4>
                                     <?php echo $p["title"]; ?>
                                 </h4>
                             </a>
                         </div>
                     <?php endforeach; ?>
-
-
 
                 </div>
 

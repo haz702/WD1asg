@@ -43,6 +43,11 @@ header {
     margin-bottom: 1.5rem;
 }
 
+.admin-content .profile-pic {
+display: flex;
+justify-content: center;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -54,6 +59,155 @@ th, td {
     text-align: left;
     border-bottom: 1px solid lightgray;
 }
+
+.confirm-delete {
+    border: 2px solid #cacaca; /* width, style, and color */
+    border-radius: 10px;
+    background: whitesmoke;
+    color: black;
+    opacity: .9;
+    text-align: center;
+    padding: 0px 0px 10px 0px;
+    width:600px;
+    height: 300px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: -300px;
+    right: -90px;
+}
+
+.background-blur {
+    position: relative;
+    top: -440px;
+    right: -250px;
+
+    opacity: .5;
+
+    width: 300px;
+}
+
+/* CSS */
+.confirm-delete form input {
+  appearance: none;
+  background-color: #3575ff;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 10px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 200px;
+  word-wrap: break-word;
+}
+
+.confirm-delete form input:hover {
+  background-color: #3586ff;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.confirm-delete form input:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.confirm-delete form input:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.confirm-delete form input:focus {
+  outline: 1px transparent;
+}
+
+.confirm-delete form input:before {
+  display: none;
+}
+
+.confirm-delete form input:-webkit-details-marker {
+  display: none;
+}
+
+
+/* Cancel Button */
+.confirm-delete input.cancel {
+    appearance: none;
+    background-color: #EEEEEE;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 10px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.74);
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    padding: 6px 16px;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 200px;
+    word-wrap: break-word;
+  }
+  
+  .confirm-delete input.cancel:hover {
+    background-color: #b8b8b8;
+    text-decoration: none;
+    transition-duration: 0.1s;
+  }
+  
+  .confirm-delete input.cancel:disabled {
+    background-color: #FAFBFC;
+    border-color: rgba(27, 31, 35, 0.15);
+    color: #959DA5;
+    cursor: default;
+  }
+  
+  .confirm-delete input.cancel:active {
+    background-color: #EDEFF2;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+    transition: none 0s;
+  }
+  
+  .confirm-delete input.cancel:focus {
+    outline: 1px transparent;
+  }
+  
+  .confirm-delete input.cancel:before {
+    display: none;
+  }
+  
+  .confirm-delete input.cancel:-webkit-details-marker {
+    display: none;
+  }
 
 .edit {
     color: green;

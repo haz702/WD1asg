@@ -76,6 +76,7 @@ function loginUser($user)
     $_SESSION["id"] = $user["id"];
     $_SESSION["username"] = $user["username"];
     $_SESSION["admin"] = $user["admin"];
+    $_SESSION["email"] = $user["email"];
     $_SESSION["message"] = 'You are now logged in';
     $_SESSION["type"] = 'success';
 
@@ -105,22 +106,42 @@ if (isset($_POST["login-btn"])) {
 }
 
 if (isset($_POST["update-user"])) {
-    adminOnly();
     $errors = validateUser($_POST);
 
     if (count($errors) === 0) {
-        // remove variables so that our post sent matches the database table attributes
-        $id = $POST["id"];
-        unset($_POST["passwordConf"], $_POST["update-user"], $_POST["id"]);
-        $_POST['password'] = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-        // check if the values incoming has the admin attribute
-        $_POST['admin'] = isset($_POST["admin"]) ? 1 : 0;
-        $user_id = update('users', $_POST["id"], $_POST);
-        $_SESSION["message"] = "Admin user created successfully";
-        $_SESSION["type"] = "success";
-        header('location: ' . BASE_URL . '/admin/users/indexUser.php');
-        exit();
+        if ($_SESSION["admin"] == 0) {            // remove variables so that our post sent matches the database table attributes
+            $id = $_POST["id"];
+            unset($_POST["passwordConf"], $_POST["update-user"], $_POST["id"]);
+            $_POST['password'] = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+            // check if the values incoming has the admin attribute
+            $_POST['admin'] = isset($_POST["admin"]) ? 1 : 0;
+            $count = update($table, $id, $_POST);
+            $_SESSION["message"] = "Profile updated successfully";
+            $_SESSION["type"] = "success";
+            $_SESSION["username"] = $_POST["username"];
+            $_SESSION["email"] = $_POST["email"];
+
+            header('location: ' . BASE_URL . '/user/users/indexUser.php');
+            exit();
+        }
+
+        if ($_SESSION["admin"] == 1) {            // remove variables so that our post sent matches the database table attributes
+            $id = $_POST["id"];
+            unset($_POST["passwordConf"], $_POST["update-user"], $_POST["id"]);
+            $_POST['password'] = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+            // check if the values incoming has the admin attribute
+            $_POST['admin'] = isset($_POST["admin"]) ? 1 : 0;
+            $count = update($table, $id, $_POST);
+            $_SESSION["message"] = "/user updated successfully";
+            $_SESSION["type"] = "success";
+            $_SESSION["username"] = $_POST["username"];
+            $_SESSION["email"] = $_POST["email"];
+            header('location: ' . BASE_URL . '/admin/users/indexUser.php');
+            exit();
+        }
     } else {
         $username = $_POST['username'];
         $admin = isset($_POST['admin']) ? 1 : 0;
@@ -132,10 +153,19 @@ if (isset($_POST["update-user"])) {
 
 // only admin can delete their account, didn't implement profile delete acc for users.
 if (isset($_GET["del_id"])) {
-    adminOnly();
-    $count = deleteData($table, $_GET["del_id"]);
-    $_SESSION["message"] = 'Admin user deleted';
-    $_SESSION["type"] = 'success';
-    header('location: ' . BASE_URL . '/admin/users/indexUser.php');
-    exit();
+    if ($_SESSION["admin"] == 0) {
+        $count = deleteData($table, $_GET["del_id"]);
+        $_SESSION["message"] = 'User deleted';
+        $_SESSION["type"] = 'success';
+        header('location: ' . BASE_URL . '/index.php');
+        exit();
+    } else {
+        $count = deleteData($table, $_GET["del_id"]);
+        $_SESSION["message"] = 'User deleted';
+        $_SESSION["type"] = 'success';
+        header('location: ' . BASE_URL . '/admin/users/indexUser.php');
+        exit();
+    }
+    
+
 }

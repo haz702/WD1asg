@@ -13,7 +13,6 @@ $description = '';
 
 //Check if add button has been clicked
 if (isset($_POST["add-topic"])) {
-    adminOnly();
     $errors = validateTopic($_POST);
     if (count($errors) == 0) {
         unset($_POST["add-topic"]);
@@ -55,7 +54,7 @@ if (isset($_GET["del_id"])) {
 }
 
 if (isset($_POST["update-topic"])) {
-    adminOnly();
+
     $errors = validateTopic($_POST);
     if (count($errors) == 0) {
         // Store the 'id' in a variable

@@ -91,7 +91,7 @@ if (isset($_GET["t_id"])) {
                     </h1>
                     <?php foreach ($posts as $post) : ?>
                         <div class="post clearfix">
-                            <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="SOASMosque" class="post-image">
+                            <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="ImageNotWorking" class="post-image">
                             <div class="post-preview">
                                 <h2><a href="single.php?id=<?php echo $post["id"]; ?>">
                                         <?php echo $post["title"]; ?>
