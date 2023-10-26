@@ -82,17 +82,17 @@ include(ROOT_PATH . "/app/controllers/profile.php");
                 <?php endforeach; ?>
 
                 <div class="confirm-delete">
-                    <form method="post" action="confirmDelete.php">
+                    <form method="post" action="indexUser.php?del_id=<?php echo $user["id"]; ?>">
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
-                        <h2>Your account will be deleted permanently</h2>
+                        <div>
+                            <p>Your account will be deleted permanently!</p>
+                        </div>
                         <p>Are you sure to proceed?</p>
                         <input type="submit" value="Confirm">
                     </form>
                     <input class="cancel" type="submit" value="Cancel">
                 </div>
-                <div class="background-blur">
-                    
-                </div>
+
             </div>
         </div>
 

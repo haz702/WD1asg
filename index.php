@@ -2,7 +2,7 @@
 include(ROOT_PATH . "/app/controllers/topics.php");
 
 $posts = array();
-$postsTitle = 'Recent Posts';
+$postsTitle = 'New Posts';
 
 if (isset($_GET["t_id"])) {
     $postsTitle = "Showing results related to '" . $_GET['name'] . "'";
@@ -45,26 +45,31 @@ if (isset($_GET["t_id"])) {
     <?php include(ROOT_PATH . "/app/includes/header.php"); ?>
     <?php include(ROOT_PATH . "/app/includes/messages.php"); ?>
 
-
     <!-- Page Wrapper-->
     <div class="page-wrapper">
 
         <!-- post slider-->
         <div class="post-slider">
-            <h1 class="slider-title">Trending Posts</h1>
+            <div class="test">
+                <p>DISCOVER NEW STORIES...</p>
+                <div class="inspire">
+                    <p>Be Up-to-Date</p>
+                    <p>Stay In Trend</p>
+                </div>
+
+            </div>
+            <h3 class="slider-title"></h3>
             <i class="fa-solid fa-chevron-left prev"></i>
             <i class="fa-solid fa-chevron-right next"></i>
 
-
             <div class="post-wrapper">
-
                 <?php foreach ($posts as $post) : ?>
                     <div class="post clearfix">
-                        <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="thirst-fest" class="slider-image">
+
                         <div class="post-info">
-                            <h4><a href="single.php?id=<?php echo $post["id"]; ?>">
+                            <h1><a href="single.php?id=<?php echo $post["id"]; ?>">
                                     <?php echo $post["title"]; ?>
-                                </a></h4>
+                                </a></h1>
                             <div class="post-userDesc">
                                 <i class="fa fa-user">
                                     <?php echo $post["username"]; ?>
@@ -75,73 +80,75 @@ if (isset($_GET["t_id"])) {
                                 </i>
                             </div>
                         </div>
+
+                        <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="thirst-fest" class="slider-image">
+
                     </div>
                 <?php endforeach; ?>
 
             </div>
             <!--//Post Slider-->
+        </div>
+        <!--Content-->
+        <div class="content clearfix">
 
-            <!--Content-->
-            <div class="content clearfix">
+            <!-- Main Content-->
+            <div class="main-content">
+                <h1 class="recent-post-title">
+                    <?php echo $postsTitle; ?>
+                </h1>
+                <?php foreach ($posts as $post) : ?>
+                    <div class="post clearfix">
+                        <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="ImageNotWorking" class="post-image">
+                        <div class="post-preview">
+                            <h2><a href="single.php?id=<?php echo $post["id"]; ?>">
+                                    <?php echo $post["title"]; ?>
+                                </a></h2>
+                            <i class="fa fa-user">
+                                <?php echo $post["username"]; ?>
+                            </i>
+                            &nbsp;
+                            <i class="fa-regular fa-calendar">
+                                <?php echo date('F j, Y', strtotime($post["created_at"])) ?>
+                            </i>
+                            <p class="preview-text">
+                                <?php echo html_entity_decode(substr("body", 0, 150) . "..."); ?>
+                            </p>
 
-                <!-- Main Content-->
-                <div class="main-content">
-                    <h1 class="recent-post-title">
-                        <?php echo $postsTitle; ?>
-                    </h1>
-                    <?php foreach ($posts as $post) : ?>
-                        <div class="post clearfix">
-                            <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="ImageNotWorking" class="post-image">
-                            <div class="post-preview">
-                                <h2><a href="single.php?id=<?php echo $post["id"]; ?>">
-                                        <?php echo $post["title"]; ?>
-                                    </a></h2>
-                                <i class="fa fa-user">
-                                    <?php echo $post["username"]; ?>
-                                </i>
-                                &nbsp;
-                                <i class="fa-regular fa-calendar">
-                                    <?php echo date('F j, Y', strtotime($post["created_at"])) ?>
-                                </i>
-                                <p class="preview-text">
-                                    <?php echo html_entity_decode(substr("body", 0, 150) . "..."); ?>
-                                </p>
-                                <a href="single.php?id=<?php echo $post["id"]; ?>" class="btn read-more">Read More</a>
-                            </div>
+                            <a href="single.php?id=<?php echo $post["id"]; ?>" class="btn read-more"><i class="fa-solid fa-chevron-right"></i></a>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <!--//Main Content-->
 
+            <div class="sidebar">
 
-
+                <div class="section search">
+                    <h2 class="section-title">Search</h2>
+                    <form action="index.php" method="post">
+                        <input type="text" name="search-term" class="text-input" placeholder="Search...">
+                    </form>
                 </div>
-                <!--//Main Content-->
 
-                <div class="sidebar">
-
-                    <div class="section search">
-                        <h2 class="section-title">Search</h2>
-                        <form action="index.php" method="post">
-                            <input type="text" name="search-term" class="text-input" placeholder="Search...">
-                        </form>
-                    </div>
-
-                    <div class="section topics">
-                        <h2 class="section-title">Types of Posts</h2>
-                        <ul>
-                            <?php foreach ($topics as $key => $topic) : ?>
-                                <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name'] ?>">
-                                        <?php echo $topic["name"]; ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-
+                <div class="section topics">
+                    <h2 class="section-title">Types of Posts</h2>
+                    <ul>
+                        <?php foreach ($topics as $key => $topic) : ?>
+                            <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name'] ?>">
+                                    <?php echo $topic["name"]; ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
 
             </div>
-            <!--//Content-->
         </div>
+
+
+        <!--//Content-->
+
         <!--//Page Wrapper-->
 
         <!-- TODO: include footer here -->

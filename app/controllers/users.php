@@ -157,7 +157,7 @@ if (isset($_GET["del_id"])) {
         $count = deleteData($table, $_GET["del_id"]);
         $_SESSION["message"] = 'User deleted';
         $_SESSION["type"] = 'success';
-        header('location: ' . BASE_URL . '/index.php');
+        header('location: ' . BASE_URL . '/logout.php');
         exit();
     } else {
         $count = deleteData($table, $_GET["del_id"]);

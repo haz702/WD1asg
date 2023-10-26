@@ -36,6 +36,7 @@ $posts = selectAll("posts", ["published" => 1]);
 </head>
 
 <body>
+
     <?php include(ROOT_PATH . "/app/includes/header.php"); ?>
 
     <!-- Page Wrapper-->
