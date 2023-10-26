@@ -18,6 +18,10 @@ include(ROOT_PATH . "/app/controllers/profile.php");
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Roboto+Slab&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- CSS Custom File-->
     <link rel="stylesheet" href="../../assets/css/style.css" />
@@ -74,7 +78,7 @@ include(ROOT_PATH . "/app/controllers/profile.php");
                             </tr>
                             <tr>
                                 <th>Delete Account</th>
-                                <td><a href="indexUser.php?del_id=<?php echo $user["id"]; ?>" class="delete">Delete Account</a></td>
+                                <td><a href="confirmDelete.php" class="delete">Delete Account</a></td>
                             </tr>
                         </table>
                     <?php endif; ?>

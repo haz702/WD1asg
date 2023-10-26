@@ -1,5 +1,5 @@
 header {
-    background: #080f14;
+    background: #FFBC4B;
 }
 
 .admin-wrapper {
@@ -10,7 +10,7 @@ header {
 .admin-wrapper .left-sidebar {
     flex:2;
     height: 100%;
-    background: #12222e;
+    background: #1e2b35;
 }
 
 .admin-wrapper .left-sidebar ul {
@@ -23,7 +23,7 @@ header {
 .admin-wrapper .left-sidebar ul li a {
     padding: 18px;
     display: block;
-    border-bottom: 1px solid #304250;
+    border-bottom: 1px solid #40515e;
 }
 
 .admin-wrapper .left-sidebar ul li a:hover {
@@ -90,10 +90,21 @@ th, td {
     width: 300px;
 }
 
+
+
 /* CSS */
+.confirm-delete form div p {
+  font-size: 20px !important;
+  font-weight: 300;
+}
+
+.confirm-delete form {
+  padding: 10px;
+}
+
 .confirm-delete form input {
   appearance: none;
-  background-color: #3575ff;
+  background-color: #3B82F6;
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 10px;
   box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
@@ -119,7 +130,7 @@ th, td {
 }
 
 .confirm-delete form input:hover {
-  background-color: #3586ff;
+  background-color: #5aa1f8;
   text-decoration: none;
   transition-duration: 0.1s;
 }
@@ -208,6 +219,8 @@ th, td {
   .confirm-delete input.cancel:-webkit-details-marker {
     display: none;
   }
+
+
 
 .edit {
     color: green;

@@ -7,7 +7,7 @@ body {
   height: 100%;
   padding: 0px;
   margin: 0px;
-  background: #f6f6f6;
+  background: #fff;
   font-family: "Lora", serif;
 }
 
@@ -20,6 +20,11 @@ h6 {
   font-family: "Roboto Slab", serif;
   color: #0f1920;
   margin: 5px;
+  /* HEADING LENGTH */
+  width: 250px; /* Adjust as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 a {
@@ -89,12 +94,12 @@ a {
 /* NAVBAR */
 
 header {
-  background: #12232e;
+  background: #FFBC4B;
   height: 66px;
 }
 
 header * {
-  color: white;
+  color: #171313;
 }
 
 header .logo {
@@ -110,7 +115,7 @@ header .logo-text {
 }
 
 header .logo-text span {
-  color: #4da8da;
+  color: #171313;
 }
 
 header ul {
@@ -124,6 +129,8 @@ header ul {
 header ul li {
   float: left;
   position: relative;
+  font-weight: bold;
+  font-size: 1.125rem;
 }
 
 header ul li i {
@@ -166,14 +173,19 @@ header ul li ul li a:hover {
 header ul li a {
   display: block;
   padding: 21px;
-  font-size: 1.1em;
+  font-size: 0.9em;
   text-decoration: none;
-  transition: 0.5s;
+  transition: 0.3s;
+}
+
+header ul li a a:hover:before,
+header ul li a a:focus:before {
+  color: #000000;
+  text-shadow: 10px 0 #000000, -10px 0 #000000;
 }
 
 header ul li a:hover {
-  background-color: #0b151b;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 header ul li a:active {
@@ -185,10 +197,10 @@ header ul li a::after {
   position: absolute;
   width: 0%;
   height: 2px;
-  background-color: #4da8da;
+  background-color: #000000;
   bottom: 0px;
   left: 0;
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 
 header ul li a:hover::after {
@@ -209,18 +221,37 @@ header .menu-toggle {
 
 /* Post slider */
 
+.test {
+  background-color: #FFBC4B;
+  font-family: "Roboto Slab", serif;
+  position: absolute;
+  top: 100px;
+  left: 250px;
+}
+
+.test p {
+  font-size: 1em;
+}
+
+.test .inspire p {
+  font-size: 4.5em;
+}
+
+
 .post-slider {
   position: relative;
+  background-color: #FFBC4B;
+  display:flex;
 }
 
 .post-slider .slider-title {
   text-align: center;
-  margin: 30px auto;
+  margin: 0px auto;
 }
 
 .post-slider .next {
   position: absolute;
-  top: 15%;
+  top: 50%;
   right: 30px;
   font-size: 2em;
   cursor: pointer;
@@ -229,7 +260,7 @@ header .menu-toggle {
 
 .post-slider .prev {
   position: absolute;
-  top: 15%;
+  top: 50%;
   left: 30px;
   font-size: 2em;
   cursor: pointer;
@@ -237,34 +268,40 @@ header .menu-toggle {
 }
 
 .post-slider .post-wrapper {
-  width: 84%;
-  height: 350px;
+  aspect-ratio: 1/1;
+  width: 600px;
+  /* height causes the background-color height*/
+  height: 750px;
   margin: 0% auto;
   overflow: hidden;
   padding: 10px 0px 10px 0px;
 }
 
+/* Changes the box dimension containing image and image info*/
 .post-slider .post-wrapper .post {
+  text-align: center;
   width: 300px;
-  height: 350px;
+  height: 550px;
   margin: 0px 10px;
   display: inline-block;
-  background: white;
+  background: #FFBC4B;
   text-transform: none;
-  border-radius: 5px;
-  box-shadow: 1rem 1rem 1rem -1rem #b3b3b3;
+  border-radius: 10px;
 }
 
 .post-slider .post-wrapper .post .slider-image {
-  width: 100%;
-  height: 200px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  width: 500px;
+  height: 500px;
+  position: relative;
+  top: -100px;
+  box-shadow: rgba(0, 0, 0, 0.4) 2px 5px 27px;
+
 }
 
 .post-slider .post-wrapper .post .post-info {
-  height: 130px;
+  height: 200px;
   padding: 0px 5px 0px 5px;
+  
 }
 
 .post-slider .post-wrapper .post .post-info .post-userDesc {
@@ -284,10 +321,18 @@ header .menu-toggle {
 }
 
 .content .main-content.single {
-  background: white;
+  background: #f3f8fa;
   padding: 20px 50px;
   font-size: 1.1em;
-  border-radius: 5px;
+  border-radius: 15px;
+  object-fit: contain;
+  text-align: center;
+}
+
+.content .main-content.single img {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .content .main-content.single .post-title {
@@ -304,8 +349,13 @@ header .menu-toggle {
   height: 270px;
   margin: 20px auto;
   border-radius: 5px;
-  background: white;
+  background: #f3f8fa;
   position: relative;
+}
+
+.content .main-content .post img {
+  padding: 15px;
+  border-radius: 10px;
 }
 
 .content .section-popular {
@@ -329,20 +379,71 @@ header .menu-toggle {
   margin-right: 10px;
   margin-bottom: 5px;
 }
-
+/*
 .content .main-content .post .read-more {
   position: absolute;
   bottom: 10px;
   right: 10px;
   border: 1px solid #12232e;
   background: transparent;
-  color: #12232e !important;
+  color: #2c2d36 !important;
 }
 
 .content .main-content .post .read-more:hover {
   background: #12232e;
   color: #ffffff !important;
   transition: all 0.25s;
+}
+*/
+.center {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content .main-content .post {
+  border-radius: 15px;
+}
+
+
+.content .main-content .post .read-more {
+  content: "\27A4";
+  font-family: Hack, monospace;
+  background: transparent;
+  border: 1px solid #12232e;
+  color: #2c2d36 !important;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.75rem;
+  transition: all 0.5s;
+  border-radius: 50px;
+}
+
+.content .main-content .post .read-more::after {
+  content: "Read More";
+  font-weight: 400;
+  position: absolute;
+  left: 40%;
+  top: 9%;
+  right: 5%;
+  bottom: 0;
+  opacity: 0;
+  color: whitesmoke !important;
+}
+.content .main-content .post .read-more:hover {
+  background: transparent;
+  transition: all 0.5s;
+  padding: 0.75rem 4.25rem 0.75rem 0.75rem;
+  color: whitesmoke !important;
+  background-color: #444444;
+}
+.content .main-content .post .read-more:hover::after {
+  opacity: 1;
+  transition: all 0.5s;
 }
 
 .content .main-content .post .post-image {
@@ -378,9 +479,9 @@ header .menu-toggle {
 .content .sidebar .section {
   background: white;
   padding: 20px;
-  border-radius: 2px;
   margin-bottom: 20px;
   margin-left: 5px;
+  border-radius: 15px;
 }
 
 .content .sidebar .section .section-title {
@@ -418,7 +519,10 @@ header .menu-toggle {
   padding: 20px;
   background: white;
   border: 5px;
+  box-shadow: rgba(0, 0, 0, 0.4) 2px 5px 27px;
+  border-radius: 15px;
 }
+
 
 .auth-content .form-title {
   text-align: center;
@@ -483,7 +587,7 @@ header .menu-toggle {
 }
 
 .input-error {
-    border-color: red !important;
+  border-color: red !important;
 }
 
 /* FOOTER */
