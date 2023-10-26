@@ -267,7 +267,7 @@ header .menu-toggle {
   padding: 0px 5px 0px 5px;
 }
 
-.post-slider .post-wrapper .post .post-info .post-userdesc {
+.post-slider .post-wrapper .post .post-info .post-userDesc {
   font-size: 1em;
 }
 
@@ -586,7 +586,7 @@ header .menu-toggle {
   padding-top: 20px;
 }
 
-/* MEDIA QUERIES (FOR THE WEBSTIE'S RESPONSIVENESS 
+/* MEDIA QUERIES (FOR THE WEBSITE'S RESPONSIVENESS 
 WHEN VIEWED ON MOBILE DEVICES */
 
 @media only screen and (max-width: 934px) {

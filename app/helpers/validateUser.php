@@ -15,7 +15,8 @@ function validateUser($user)
 
     if (empty($user["password"])) {
         array_push($errors, "Please enter a password");
-
+    } elseif (strlen($user["password"]) < 8) {
+        array_push($errors, "Password must be at least 8 characters");
     }
 
     if ($user["passwordConf"] !== $user["password"]) {
@@ -30,17 +31,22 @@ function validateUser($user)
     // fetch a user from database using the title
     $existingUser = selectOne("users", ["email" => $user["email"]]);
     // check if it exist
+
     if ($existingUser) {
-        // post defined in the database != $topic trying to update
-        if ($user["update-user"] && $existingUser["id"] != $user["id"]) {
+
+        if (isset($user["update-user"]) && $existingUser["id"] != $user["id"]) {
             array_push($errors, "Email already exist");
         }
 
-        // check if user if creating a topic
-        if (isset($user["add-topic"])) {
-            array_push($errors, "Topic name already exist");
+        if (isset($user["create-admin"])) {
+            array_push($errors, "Email already exist");
+        }
+
+        if (isset($user["register-btn"])) {
+            array_push($errors, "Email already exist");
         }
     }
+
     return $errors;
 }
 

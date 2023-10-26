@@ -2,6 +2,8 @@
 
 include(ROOT_PATH . "/app/database/db.php");
 include(ROOT_PATH . "/app/helpers/validateTopic.php");
+include(ROOT_PATH .  "/app/helpers/middleware.php");
+
 $table = "topics";
 $topics = selectAll($table);
 $errors = array();
@@ -42,6 +44,7 @@ if (isset($_GET["id"])) {
 }
 
 if (isset($_GET["del_id"])) {
+    adminOnly();
     $id = $_GET["del_id"];
     $count = deleteData($table, $id);
     $_SESSION["message"] = 'Topic deleted successfully';
@@ -51,6 +54,7 @@ if (isset($_GET["del_id"])) {
 }
 
 if (isset($_POST["update-topic"])) {
+
     $errors = validateTopic($_POST);
     if (count($errors) == 0) {
         // Store the 'id' in a variable

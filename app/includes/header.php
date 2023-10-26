@@ -9,23 +9,24 @@
             <li><a href="aboutUs.php">About Us</a></li>
             <li><a href=#>Services</a></li>
 
-            <?php if (isset($_SESSION['id'])): ?>
+            <?php if (isset($_SESSION['id'])) : ?>
                 <li>
                     <a href=#>
                         <i class="fa fa-user"></i>
-                        <?php echo $_SESSION ['username']; ?>
+                        <?php echo $_SESSION['username']; ?>
                         <i class="fa fa-chevron-down"></i>
                     </a>
                     <ul>
-                        <?php if($_SESSION["admin"]): ?>
-                        <li><a href="<?php echo BASE_URL . '/admin/dashboard.php'?>"">DashBoard</a></li>
+                        <?php if ($_SESSION["admin"]) : ?>
+                            <li><a href="<?php echo BASE_URL . '/admin/dashboard.php' ?>"">DashBoard</a></li>
                         <?php endif; ?>
-                        <li><a href="<?php echo BASE_URL . '/logout.php' ?>" class="Logout">Logout</a></li>
+                        <li><a href=" <?php echo BASE_URL . '/user/users/indexUser.php' ?>"">Profile</a></li>
+                            <li><a href="<?php echo BASE_URL . '/logout.php' ?>" class="Logout">Logout</a></li>
                     </ul>
                 </li>
-            <?php else: ?>
-                <li><a href="<?php echo BASE_URL . '/register.php'?>">SignUp</a></li>
-                <li><a href="<?php echo BASE_URL . '/login.php'?>">Login</a></li>
+            <?php else : ?>
+                <li><a href="<?php echo BASE_URL . '/register.php' ?>">SignUp</a></li>
+                <li><a href="<?php echo BASE_URL . '/login.php' ?>">Login</a></li>
             <?php endif; ?>
         </ul>
     </div>

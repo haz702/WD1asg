@@ -1,13 +1,13 @@
 <?php include("path.php"); ?>
-<?php include(ROOT_PATH . "/app/controllers/posts.php"); ?>
-<?php
+<?php include(ROOT_PATH . "/app/controllers/posts.php");
+
 if (isset($_GET["id"])) {
     $post = selectOne("posts", ["id" => $_GET["id"]]);
 
 }
-
-$posts = selectAll("posts", ["published" => 1])
-    ?>
+$topics = selectAll('topics');
+$posts = selectAll("posts", ["published" => 1]);
+?>
 
 
 
@@ -50,7 +50,7 @@ $posts = selectAll("posts", ["published" => 1])
                     <h1 class="post-title">
                         <?php echo $post["title"]; ?>
                     </h1>
-                    <img src="assets/images/image5.jpg" alt="SOASMosque" class="single-image">
+                    <img src="<?php echo BASE_URL . "/assets/images/" . $post["image"] ?>" alt="SOASMosque" class="post-image">
 
                     <div class="post-content">
                         <?php echo html_entity_decode($post["body"]); ?>
@@ -66,25 +66,29 @@ $posts = selectAll("posts", ["published" => 1])
                     <h2 class="section-title">Popular Posts</h2>
                     <?php foreach ($posts as $p): ?>
                         <div class="post clearfix">
-                        <img src="<?php BASE_URL . '/assets/images/' . $p['image'] ?>" alt="Kianggeh">
-                        <a href="single2.html" class="title">
-                            <h4><?php echo $p["title"] ?></h4>
-                        </a>
-                    </div>
+                            <img src="<?php echo BASE_URL . "/assets/images/" . $p["image"]; ?>" alt="ImgNotWork">
+                            <a href="single.php?id=<?php echo $p["id"]; ?>" class="title">
+                                <h4>
+                                    <?php echo $p["title"]; ?>
+                                </h4>
+                            </a>
+                        </div>
                     <?php endforeach; ?>
-
-
 
                 </div>
 
                 <div class="section topics">
                     <h2 class="section-title">Types of Posts</h2>
                     <ul>
-                        <li><a href="#">Trending Posts</a></li>
-                        <li><a href="#">Blogs of Local Places</a></li>
-                        <li><a href="#">Upcoming Events</a></li>
-                        <li><a href="#">Interesting Stories</a></li>
-                        <li><a href="#">Brunei Wiki</a></li>
+                        <li>
+                            <?php foreach ($topics as $topic): ?>
+                                <!-- t_id = topic id -->
+                                <a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name'] ?>">
+                                    <?php echo $topic["name"]; ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </li>
+
                     </ul>
                 </div>
 
